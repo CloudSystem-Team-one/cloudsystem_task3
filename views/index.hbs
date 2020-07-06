@@ -1,0 +1,70 @@
+<h1>Cloud System</h1>
+<h2>Task 3</h2>
+
+<section class="insert">
+    <h3>Insert Data</h3>
+    <form action="/insert" method="post">
+        <div class="input">
+            <label for="Name">Name</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="input">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+        </div>
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <button type="submit">INSERT</button>
+    </form>
+</section>
+
+<section class="get">
+    <h3>Get Data</h3>
+    <a href="/get-data">LOAD DATA</a>
+    <div>
+        {{# each items }}
+        <article class="item">
+            <div>Name: {{ this.name }}</div>
+            <div>Phone: {{ this.phone }}</div>
+            <div>Email: {{ this.email }}</div>
+            <div>ID: {{ this._id }}</div>
+        </article>
+        {{/each}}
+    </div>
+</section>
+
+<section class="update">
+    <h3>Update Data</h3>
+    <form action="/update" method="post">
+        <div class="input">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id">
+        </div>
+        <div class="input">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="input">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+        </div>
+        <button type="submit">UPDATE</button>
+    </form>
+</section>
+</section>
+<section class="delete">
+    <h3>Delete Data</h3>
+    <form action="/delete" method="post">
+        <div class="input">
+            <label for="id">ID</label>
+            <input type="text" id="id" name="id">
+        </div>
+        <button type="submit">DELETE</button>
+    </form>
+</section>
