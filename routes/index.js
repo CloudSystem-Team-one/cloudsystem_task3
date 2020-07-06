@@ -1,10 +1,15 @@
 var express = require("express");
+const fileUpload = require("express-fileupload");
 var router = express.Router();
 var mongo = require("mongodb").MongoClient;
 var objectId = require("mongodb").ObjectID;
 var assert = require("assert");
+const binary = mongo.Binary;
+const fs = require("fs");
+const app = express();
 
 var url = "mongodb://localhost:27017/test";
+app.use(fileUpload());
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -48,6 +53,32 @@ router.post("/insert", function (req, res, next) {
   res.redirect("/");
 });
 
+router.post("/upload", (req, res) => {
+  let file = { name: req.body.name, file: binary(req.files.uploadedFile.data) };
+  insertFile(file, res);
+});
+
+function insertFile(file, res) {
+  mongo.connect(
+    "mongodb://localhost:27017",
+    { useNewUrlParser: true },
+    (err, db) => {
+      if (err) {
+        return err;
+      } else {
+        let collection = db.collection("user-data");
+        try {
+          collection.insertOne(file);
+          console.log("File Inserted");
+        } catch (err) {
+          console.log("Error while inserting:", err);
+        }
+        db.close();
+        res.redirect("/");
+      }
+    }
+  );
+}
 router.post("/update", function (req, res, next) {
   var item = {
     name: req.body.name,
