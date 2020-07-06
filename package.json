@@ -12,7 +12,7 @@
     "express": "^4.13.4",
     "express-handlebars": "^3.1.0",
     "mongodb": "^2.2.36",
-    "morgan": "^1.6.1",
+    "morgan": "^1.9.1",
     "serve-favicon": "^2.3.2"
   }
 }
